@@ -1,0 +1,43 @@
+{
+  "name": "scoundrel",
+  "version": "1.0.0",
+  "description": "Scoundrel is a javascript Rougelike library",
+  "scripts": {
+    "start": "webpack-dev-server --watch",
+    "build": "webpack",
+    "build-min": "webpack && webpack -p --output-filename scoundrel.min.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://mlunnay@bitbucket.org/mlunnay/scoundrel.git"
+  },
+  "keywords": [],
+  "author": "Michael Lunnay",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/mlunnay/scoundrel#readme",
+  "devDependencies": {
+    "@types/pixi.js": "^4.4.1",
+    "brfs": "^1.4.3",
+    "chai": "^3.5.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "js-polyfills": "^0.1.33",
+    "mocha": "^3.2.0",
+    "mocha-typescript": "^1.0.23",
+    "rimraf": "^2.6.1",
+    "sinon": "^2.1.0",
+    "source-map-loader": "^0.2.0",
+    "transform-loader": "^0.2.4",
+    "ts-loader": "^2.0.3",
+    "typedoc": "^0.5.10",
+    "typedoc-webpack-plugin": "^1.1.4",
+    "typescript": "^2.2.1",
+    "webpack": "^2.3.1",
+    "webpack-dev-server": "^2.4.2",
+    "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {
+    "pixi.js": "^4.4.3"
+  }
+}

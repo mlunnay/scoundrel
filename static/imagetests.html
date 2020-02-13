@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <style>
+            #results > div > canvas { background-color: #000 }
+        </style>
+    </head>
+    <body>
+        <canvas id="imgcanvas" style="background-color: #000" width="256" height="256">
+        </canvas>
+        <div id="results"></div>
+        <script>
+            var img = new Image();
+            //img.src = 'terminal16x16.png';
+            img.src = 'curses_12x12.png';
+            
+            img.onload = function() {
+            draw(this);
+            };
+
+            function draw(img) {
+                var canvas = document.getElementById('imgcanvas');
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                img.style.display = 'none';
+                let results = document.getElementById("results");
+
+                let res = []
+                for(var y = 0; y < 16; y++) {
+                    for(var x = 0; x < 16; x++) {
+                        let img = ctx.getImageData(x * 16, y * 16, 16, 16);
+                        let density = getDensity(img);
+                        res.push({img: img, code: y * 16 + x, density: density})
+                    }
+                }
+                res.sort((a, b) => a.density - b.density);
+                for(let i = 0; i < res.length; i++){
+                        let canvas = document.createElement("canvas");
+                        canvas.width = 16;
+                        canvas.height = 16;
+                        canvas.getContext('2d').putImageData(res[i].img, 0, 0);
+                        let div = document.createElement("div");
+                        div.appendChild(canvas);
+                        div.appendChild(document.createTextNode("Code: " + res[i].code + " Density: " + res[i].density / 256));
+                        results.appendChild(div);
+                }
+            }
+            
+            function getDensity(img) {
+                var density = 0;
+                for(var x = 0; x < img.data.length; x += 4){
+                    if(img.data[x+1] > 0)
+                        density += 1;
+                }
+                return density;
+            }
+
+        </script>
+    </body>
+</html>
